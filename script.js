@@ -10,6 +10,7 @@ function validateNumberOrExit(number) {
     process.exit(1);
   }
 }
+// validateNumberOrExit sera appelée dans promptNumber
 
 function promptNumber(message) {
   const number = Number(prompt(message));
@@ -17,6 +18,29 @@ function promptNumber(message) {
   return number;
 }
 // promptNumber sera appelée pour l'opérator, le firstNumber, le secondNumber
+
+function calculateResult(operator, firstNumber, secondNumber) {
+  if (operator === 1) {
+    console.log("Addition");
+    return firstNumber + secondNumber;
+  }
+  if (operator === 2) {
+    console.log("Soustraction");
+    return firstNumber - secondNumber;
+  }
+  if (operator === 3) {
+    console.log("Multiplication");
+    return firstNumber * secondNumber;
+  }
+  if (operator === 4) {
+    if (secondNumber === 0) {
+      console.log("Error : division by 0");
+      process.exit(1);
+    }
+    console.log("Division");
+    return firstNumber / secondNumber;
+  }
+}
 
 console.log("ADDITION-MASTER ™️");
 
@@ -45,26 +69,5 @@ while (operator === 0) {
 
 const firstNumber = promptNumber("Enter the first number : ");
 const secondNumber = promptNumber("Enter the second number : ");
-
-if (operator === 4 && secondNumber === 0) {
-  console.log("Error : division by 0");
-  process.exit(1);
-}
-
-switch (operator) {
-  case 1:
-    console.log("The result of addition is : ", firstNumber + secondNumber);
-    break;
-  case 2:
-    console.log("The result of soustraction is : ", firstNumber - secondNumber);
-    break;
-  case 3:
-    console.log(
-      "The result of multiplication is : ",
-      firstNumber * secondNumber
-    );
-    break;
-  case 4:
-    console.log("The result of division is : ", firstNumber / secondNumber);
-    break;
-}
+const result = calculateResult(operator, firstNumber, secondNumber);
+console.log("The result : ", result);
