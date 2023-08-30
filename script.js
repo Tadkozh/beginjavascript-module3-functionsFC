@@ -2,11 +2,6 @@ import { prompt } from "./helper.js";
 
 const NUMBER_LIMIT = 100000000000000;
 
-// 🦁 Créer une function `validateNumber`
-// 🦁 Elle prendra en paramètre `number`
-// 🦁 Si `number` n'est pas un nombre ou est trop grand / trop petit (max: 100000000000000)
-// 🦁 Alors afficher "Error : number is not a number or is too big / too small (max: 100000000000000)" et quitter le programme
-
 function validateNumberOrExit(number) {
   if (Number.isNaN(number) || Math.abs(number) > NUMBER_LIMIT) {
     console.log(
@@ -15,6 +10,13 @@ function validateNumberOrExit(number) {
     process.exit(1);
   }
 }
+
+function promptNumber(message) {
+  const number = Number(prompt(message));
+  validateNumberOrExit(number);
+  return number;
+}
+// promptNumber sera appelée pour l'opérator, le firstNumber, le secondNumber
 
 console.log("ADDITION-MASTER ™️");
 
@@ -27,7 +29,7 @@ console.log(`Choose an operator :
 let operator = 0;
 
 while (operator === 0) {
-  const tempOperator = Number(prompt("Enter the operator : "));
+  const tempOperator = promptNumber("Enter the operator : ");
 
   if (
     tempOperator !== 1 &&
@@ -41,17 +43,8 @@ while (operator === 0) {
   }
 }
 
-const firstNumber = Number(prompt("Enter the first number : "));
-
-// 🦁 Déplacer la validation du nombre dans la function `validateNumber`
-// 🦁 Utiliser la function `validateNumber` pour valider `firstNumber`
-validateNumberOrExit(firstNumber);
-
-const secondNumber = Number(prompt("Enter the second number : "));
-
-// 🦁 Déplacer la validation du nombre dans la function `validateNumber`
-// 🦁 Utiliser la function `validateNumber` pour valider `secondNumber`
-validateNumberOrExit(secondNumber);
+const firstNumber = promptNumber("Enter the first number : ");
+const secondNumber = promptNumber("Enter the second number : ");
 
 if (operator === 4 && secondNumber === 0) {
   console.log("Error : division by 0");
