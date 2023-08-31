@@ -42,31 +42,24 @@ function calculateResult(operator, firstNumber, secondNumber) {
   }
 }
 
-console.log("ADDITION-MASTER ™️");
+function promptOperator() {
+  const operator = promptNumber("Enter the operator : ");
 
+  if (operator !== 1 && operator !== 2 && operator !== 3 && operator !== 4) {
+    console.log("\nError : operator is not 1, 2, 3 or 4 ! Retry.");
+    return promptOperator();
+  }
+  return operator;
+}
+
+console.log("ADDITION-MASTER ™️");
 console.log(`Choose an operator :
 1. Addition
 2. Soustraction
 3. Multiplication
 4. Division`);
 
-let operator = 0;
-
-while (operator === 0) {
-  const tempOperator = promptNumber("Enter the operator : ");
-
-  if (
-    tempOperator !== 1 &&
-    tempOperator !== 2 &&
-    tempOperator !== 3 &&
-    tempOperator !== 4
-  ) {
-    console.log("\nError : operator is not 1, 2, 3 or 4 ! Retry.");
-  } else {
-    operator = tempOperator;
-  }
-}
-
+const operator = promptOperator();
 const firstNumber = promptNumber("Enter the first number : ");
 const secondNumber = promptNumber("Enter the second number : ");
 const result = calculateResult(operator, firstNumber, secondNumber);
